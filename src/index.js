@@ -24,7 +24,10 @@ class Board extends React.Component {
 	}
 
 	handleClick = (i) => {
-		console.log(i)
+		// 通过使用 .slice() 方法创建了数组的一个副本，而不是直接修改现有的数组
+		const squares = this.state.squares.slice()
+		squares[i] = 'X'
+		this.setState({squares})
 	}
 
 	renderSquare(i) {

@@ -20,7 +20,32 @@ class Board extends React.Component {
 	}
 
 	handleClick = (i) => {
-		// 通过使用 .slice() 方法创建了数组的一个副本，而不是直接修改现有的数组
+		/*
+		* 使用 slice() 函数为每一步创建 squares 数组的副本，同时把这个数组当作不可变对象。
+		* 这样我们就可以把所有 squares 数组的历史版本都保存下来了，然后可以在历史的步骤中随意跳转。
+		* 把历史的 squares 数组保存在另一个名为 history 的数组中。
+		* history 数组保存了从第一步到最后一步的所有的棋盘状态。
+		* history 数组的结构如下所示：
+				 history = [
+					  // 第一步之前
+					  {
+					    squares: [
+					      null, null, null,
+					      null, null, null,
+					      null, null, null,
+					    ]
+					  },
+					  // 第一步之后
+					  {
+					    squares: [
+					      null, null, null,
+					      null, 'X', null,
+					      null, null, null,
+					    ]
+					  },
+					  // ...
+					]
+		* */
 		const squares = this.state.squares.slice()
 		if (calculateWinner(squares) || squares[i]) {
 			return;
